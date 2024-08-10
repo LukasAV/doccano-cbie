@@ -76,6 +76,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -83,7 +84,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 
@@ -225,8 +225,10 @@ if DATABASES["default"].get("ENGINE") == "sql_server.pyodbc":
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", False)
+SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = env.bool("CSRF_COOKIE_SECURE", False)
 CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", [])
+CSRF_COOKIE_SAMESITE = 'None'
 
 # Allow all host headers
 ALLOWED_HOSTS = ["*"]
@@ -235,6 +237,10 @@ if DEBUG:
     CORS_ORIGIN_ALLOW_ALL = True
     CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000", "http://0.0.0.0:3000", "http://localhost:3000"]
     CSRF_TRUSTED_ORIGINS += env.list("CSRF_TRUSTED_ORIGINS", [])
+else:
+    CORS_ALLOWED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", [])
+    CORS_ALLOW_CREDENTIALS = True
+    CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", [])
 
 # Batch size for importing data
 IMPORT_BATCH_SIZE = env.int("IMPORT_BATCH_SIZE", 1000)

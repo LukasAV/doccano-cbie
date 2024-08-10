@@ -33,6 +33,14 @@ class JSONL(Format):
     name = "JSONL"
 
 
+class OpenNLP(Format):
+    name = "OpenNLP name finder training format"
+
+
+class CoNLL(Format):
+    name = "CoNLL"
+
+
 class Options:
     options: Dict[str, List] = defaultdict(list)
 
@@ -68,6 +76,8 @@ SEQUENCE_LABELING_DIR = EXAMPLE_DIR / "sequence_labeling"
 RELATION_EXTRACTION_DIR = EXAMPLE_DIR / "relation_extraction"
 Options.register(ProjectType.SEQUENCE_LABELING, JSONL, SEQUENCE_LABELING_DIR / "example.jsonl")
 Options.register(ProjectType.SEQUENCE_LABELING, JSONL, RELATION_EXTRACTION_DIR / "example.jsonl", True)
+Options.register(ProjectType.SEQUENCE_LABELING, OpenNLP, SEQUENCE_LABELING_DIR / "example.opennlp.txt")
+Options.register(ProjectType.SEQUENCE_LABELING, CoNLL, SEQUENCE_LABELING_DIR / "example.txt")
 
 # Sequence to sequence
 SEQ2SEQ_DIR = EXAMPLE_DIR / "sequence_to_sequence"

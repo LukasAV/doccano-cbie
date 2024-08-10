@@ -1,0 +1,20 @@
+trigger: none
+
+variables:
+  SERVICE_CONNECTION: 'cbie-rg'
+
+# secrets:
+#   DEPLOYMENT_TOKEN
+
+pool:
+  name: 'Default'
+
+steps:
+  - task: AzureStaticWebApp@0
+    inputs:
+      output_location: 'dist'
+      cwd: '$(System.DefaultWorkingDirectory)/frontend'
+      app_build_command: 'yarn build'
+      azure_static_web_apps_api_token: $(DEPLOYMENT_TOKEN)
+    env:
+      baseUrl: 'https://cbie-doccano-backend-hdfbdqgqfyfcashj.eastus-01.azurewebsites.net'

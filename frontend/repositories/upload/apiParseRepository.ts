@@ -1,4 +1,5 @@
 import ApiService from '@/services/api.service'
+import {baseURL} from '~/global';
 
 export class APIParseRepository {
   constructor(private readonly request = ApiService) {}
@@ -22,7 +23,7 @@ export class APIParseRepository {
   }
 
   revert(serverId: string): void {
-    const url = `/fp/revert/`
+    const url = `${baseURL}/fp/revert/`
     this.request.delete(url, serverId)
   }
 }

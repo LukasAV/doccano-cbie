@@ -1,0 +1,57 @@
+version: "3.7"
+services:
+
+  backend:
+    image: cbiecontainerregistry.azurecr.io/doccano:latest
+    volumes:
+      - static_volume:/backend/staticfiles
+      - media:/backend/media
+      - tmp_file:/backend/filepond-temp-uploads
+    environment:
+      ADMIN_USERNAME: "${ADMIN_USERNAME}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      CELERY_BROKER_URL: "${CELERY_BROKER_URL}"
+      DATABASE_URL: "${DATABASE_URL}"
+      CSRF_TRUSTED_ORIGINS: "${CSRF_TRUSTED_ORIGINS}"
+      ALLOW_SIGNUP: "False"
+      DEBUG: "False"
+      DJANGO_SETTINGS_MODULE: "config.settings.production"
+    ports:
+      - 80:8000
+    networks:
+      - network-backend
+
+  celery:
+    image: cbiecontainerregistry.azurecr.io/doccano:latest
+    volumes:
+      - media:/backend/media
+      - tmp_file:/backend/filepond-temp-uploads
+    entrypoint: ["/opt/bin/prod-celery.sh"]
+    environment:
+      PYTHONUNBUFFERED: "1"
+      CELERY_BROKER_URL: "${CELERY_BROKER_URL}"
+      DATABASE_URL: "${DATABASE_URL}"
+      DJANGO_SETTINGS_MODULE: "config.settings.production"
+    depends_on:
+      - rabbitmq
+    networks:
+      - network-backend
+
+  rabbitmq:
+    image: rabbitmq:3.10.7-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+    ports:
+      - 5672:5672
+    networks:
+      - network-backend
+
+volumes:
+  static_volume:
+  media:
+  tmp_file:
+
+networks:
+  network-backend:

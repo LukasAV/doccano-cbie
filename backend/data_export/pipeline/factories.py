@@ -3,7 +3,7 @@ from typing import Dict, List, Type
 from django.db.models import QuerySet
 
 from . import writers
-from .catalog import CSV, JSON, JSONL, FastText
+from .catalog import CSV, JSON, JSONL, FastText, OpenNLP, CoNLL
 from .comments import Comments
 from .formatters import (
     DictFormatter,
@@ -25,6 +25,8 @@ def create_writer(file_format: str) -> writers.Writer:
         JSON.name: writers.JsonWriter(),
         JSONL.name: writers.JsonlWriter(),
         FastText.name: writers.FastTextWriter(),
+        OpenNLP.name: writers.OpenNLPWriter(),
+        CoNLL.name: writers.CoNLLWriter(),
     }
     if file_format not in mapping:
         ValueError(f"Invalid format: {file_format}")
@@ -80,6 +82,12 @@ def create_formatter(project: Project, file_format: str) -> List[Formatter]:
                 TupledSpanFormatter(Spans.column),
                 ListedCategoryFormatter(Comments.column),
                 RenameFormatter(**mapper_sequence_labeling),
+            ],
+            OpenNLP.name: [
+                RenameFormatter(**mapper_relation_extraction),
+            ],
+            CoNLL.name: [
+                RenameFormatter(**mapper_relation_extraction),
             ]
         },
         ProjectType.SEQ2SEQ: {

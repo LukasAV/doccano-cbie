@@ -1,0 +1,2 @@
+export const baseURL= process.env.BASE_URL ||'https://cbie-doccano-backend-hdfbdqgqfyfcashj.eastus-01.azurewebsites.net/v1'
+// export const baseURL = 'http://localhost:8000/v1'  // for local development

@@ -1,6 +1,6 @@
 {
   "name": "doccano",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "doccano is an open source annotation tools for machine learning practitioner.",
   "author": "Hironsan",
   "private": true,
@@ -72,6 +72,7 @@
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/google-fonts": "^2.0.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.14.171",
     "@types/uuid": "^8.3.4",
     "@types/wavesurfer.js": "^5.1.0",
@@ -100,11 +101,13 @@
     "vue-jest": "^3.0.7"
   },
   "resolutions": {
+    "eve": "file:./eve-master",
     "node-fetch": "^2.6.7",
     "follow-redirects": "^1.14.7",
     "highlight.js": "^10.4.1",
     "markdown-it": "^12.3.2",
     "watchpack": "^1.7.5",
     "minimist": "npm:minimist-lite@2.2.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

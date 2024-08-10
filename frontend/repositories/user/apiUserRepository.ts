@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { UserItem } from '@/domain/models/user/user'
 import ApiService from '@/services/api.service'
 
@@ -11,6 +12,7 @@ export class APIUserRepository {
   async getProfile(): Promise<UserItem> {
     const url = '/me'
     const response = await this.request.get(url)
+    Cookies.set('csrftoken', response.data.cookies.csrftoken)
     return toModel(response.data)
   }
 

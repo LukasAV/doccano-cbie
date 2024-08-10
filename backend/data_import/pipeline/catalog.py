@@ -167,6 +167,15 @@ class Excel(Format):
     accept_types = "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
 
+class Word(Format):
+    name = "Word"
+    accept_types = "application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
+    @staticmethod
+    def is_plain_text():
+        return True
+
+
 class TextFile(Format):
     name = "TextFile"
     accept_types = "text/*"
@@ -188,6 +197,11 @@ class TextLine(Format):
 class CoNLL(Format):
     name = "CoNLL"
     accept_types = "text/*"
+
+
+class BioC(Format):
+    name = "BioC"
+    accept_types = "text/xml"
 
 
 class ImageFile(Format):
@@ -225,6 +239,11 @@ class ArgCoNLL(BaseModel):
     encoding: encodings = "utf_8"
     scheme: Literal["IOB2", "IOE2", "IOBES", "BILOU"] = "IOB2"
     delimiter: Literal[" ", ""] = " "
+
+
+class ArgBioC(BaseModel):
+    encoding: encodings = "utf_8"
+    infon_label_key: str = "type"
 
 
 class ArgNone(BaseModel):
@@ -302,6 +321,15 @@ for task_id in text_tasks:
             file=TASK_AGNOSTIC_DIR / "text_lines.txt",
         )
     )
+    Options.register(
+        Option(
+            display_name=Word.name,
+            task_id=task_id,
+            file_format=Word,
+            arg=ArgNone,
+            file=TASK_AGNOSTIC_DIR / "text_files.txt",
+        )
+    )
 
 # Text Classification
 Options.register(
@@ -367,6 +395,15 @@ Options.register(
         file_format=CoNLL,
         arg=ArgCoNLL,
         file=SEQUENCE_LABELING_DIR / "example.txt",
+    )
+)
+Options.register(
+    Option(
+        display_name=BioC.name,
+        task_id=ProjectType.SEQUENCE_LABELING,
+        file_format=BioC,
+        arg=ArgBioC,
+        file=SEQUENCE_LABELING_DIR / "example.bioc.xml",
     )
 )
 

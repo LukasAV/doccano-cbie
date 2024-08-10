@@ -96,6 +96,7 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import 'filepond/dist/filepond.min.css'
 import Cookies from 'js-cookie'
 import vueFilePond from 'vue-filepond'
+import {baseURL} from '~/global';
 const FilePond = vueFilePond(FilePondPluginFileValidateType)
 
 export default {
@@ -127,7 +128,7 @@ export default {
       ],
       requiredRules: [(v) => !!v || 'Field value is required'],
       server: {
-        url: '/v1/fp',
+        url: `${baseURL}/fp`,
         headers: {
           'X-CSRFToken': Cookies.get('csrftoken')
         },

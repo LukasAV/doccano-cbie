@@ -2,6 +2,7 @@ import csv
 import io
 import json
 import os
+import re
 from typing import Any, Dict, Iterator, List, Tuple
 
 import chardet
@@ -9,6 +10,9 @@ import pyexcel
 import pyexcel.exceptions
 from chardet import UniversalDetector
 from seqeval.scheme import BILOU, IOB2, IOBES, IOE2, Tokens
+
+import spire.doc
+from bioc import biocxml
 
 from .exceptions import FileParseException
 from .readers import (
@@ -232,6 +236,23 @@ class ExcelParser(Parser):
     def errors(self) -> List[FileParseException]:
         return self._errors
 
+# FMT_ADD
+class WordParser(Parser):
+    """WordParser is a parser to read a word file."""
+
+    def __init__(self, **kwargs):
+        self._errors = []
+
+    def parse(self, filename: str) -> Iterator[Dict[Any, Any]]:
+        document = spire.doc.Document()
+        document.LoadFromFile(filename)
+        result = document.GetText()
+        yield {DEFAULT_TEXT_COLUMN: re.sub(r'^Evaluation Warning: The document was created with Spire.Doc for Python.\s*', '', result, flags=re.MULTILINE)}
+
+    @property
+    def errors(self) -> List[FileParseException]:
+        return self._errors
+
 
 class FastTextParser(Parser):
     """FastTextParser is a parser to read a fastText format and returns a text and labels.
@@ -346,3 +367,41 @@ class CoNLLParser(Parser):
             end = start + len(text)
             labels.append((start, end, entity.tag))
         return labels
+
+class BioCParser(Parser):
+    """BioCParser is a parser to read BioC XML files and returns a text and labels.
+
+    """
+
+    def __init__(self, encoding: str = DEFAULT_ENCODING, infon_label_key: str = 'type', **kwargs):
+        self.encoding = encoding
+        self.infon_label_keys = [key.strip() for key in infon_label_key.split(',')]
+        self._errors = []
+
+    def parse(self, filename: str) -> Iterator[Dict[Any, Any]]:
+        encoding = decide_encoding(filename, self.encoding)
+        with open(filename, encoding=encoding) as f:
+            collection = biocxml.load(f)
+            for document in collection.documents:
+                for passage in document.passages:
+                    labels = self.get_labels(passage.annotations)
+                    yield {DEFAULT_TEXT_COLUMN: passage.text, DEFAULT_LABEL_COLUMN: labels}
+
+                    for sentence in passage.sentences:
+                        labels = self.get_labels(sentence.annotations)
+                        yield {DEFAULT_TEXT_COLUMN: sentence.text, DEFAULT_LABEL_COLUMN: labels}
+
+    def get_labels(self, annotations):
+        return [(annotation.locations[0].offset,
+                 annotation.locations[0].offset + annotation.locations[0].length,
+                 self.get_label(annotation.infons)) for annotation in annotations]
+
+    def get_label(self, infons):
+        for infon_label_key in self.infon_label_keys:
+            if infon_label_key in infons:
+                return infons[infon_label_key]
+        return 'unknown'
+
+    @property
+    def errors(self) -> List[FileParseException]:
+        return self._errors

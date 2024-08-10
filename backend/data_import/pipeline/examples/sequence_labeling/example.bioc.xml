@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<collection>
+    <document>
+        <id>1</id>
+        <passage>
+            <offset>0</offset>
+            <text>EU rejects German call to boycott British lamb.</text>
+            <annotation id="1">
+                <location offset="0" length="2"/>
+                <text>EU</text>
+                <infon key="type">ORG</infon>
+            </annotation>
+        </passage>
+    </document>
+    <document>
+        <id>2</id>
+        <passage>
+            <offset>0</offset>
+            <text>Peter Blackburn</text>
+            <annotation id="2">
+                <location offset="0" length="15"/>
+                <text>Peter Blackburn</text>
+                <infon key="type">PERSON</infon>
+            </annotation>
+        </passage>
+    </document>
+    <document>
+        <id>3</id>
+        <passage>
+            <offset>0</offset>
+            <text>President Obama</text>
+            <annotation id="3">
+                <location offset="10" length="5"/>
+                <text>Obama</text>
+                <infon key="type">PERSON</infon>
+            </annotation>
+        </passage>
+    </document>
+</collection>

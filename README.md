@@ -1,3 +1,9 @@
+# doccano-cbie
+
+This is a fork of the doccano project, with the goal of adding new features and improvements to the original project as described in the thesis _Implementierung einer Web-basierten Oberfläche zur Annotation von Daten für Named Entity Recognition auf der Basis von verschiedenen Textformaten in Azure_ (_Implementation of a web-based interface for named entity recognition data annotation of different text formats in Azure_)
+
+---
+
 <div align="center">
   <img src="https://raw.githubusercontent.com/doccano/doccano/master/docs/images/logo/doccano.png">
 </div>

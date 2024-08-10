@@ -16,6 +16,7 @@ import Cookies from 'js-cookie'
 import vueFilePond from 'vue-filepond'
 import 'filepond/dist/filepond.min.css'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+import {baseURL} from '~/global';
 const FilePond = vueFilePond(FilePondPluginFileValidateType)
 
 export default {
@@ -35,7 +36,7 @@ export default {
     return {
       myFiles: [],
       server: {
-        url: '/v1/fp',
+        url: `${baseURL}/fp`,
         headers: {
           'X-CSRFToken': Cookies.get('csrftoken')
         },

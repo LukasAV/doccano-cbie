@@ -4,7 +4,9 @@ from .catalog import (
     JSONL,
     AudioFile,
     CoNLL,
+    BioC,
     Excel,
+    Word,
     FastText,
     Format,
     ImageFile,
@@ -13,8 +15,10 @@ from .catalog import (
 )
 from .parsers import (
     CoNLLParser,
+    BioCParser,
     CSVParser,
     ExcelParser,
+    WordParser,
     FastTextParser,
     JSONLParser,
     JSONParser,
@@ -33,7 +37,9 @@ def create_parser(file_format: Format, **kwargs):
         JSON.name: JSONParser,
         FastText.name: FastTextParser,
         Excel.name: ExcelParser,
+        Word.name: WordParser,
         CoNLL.name: CoNLLParser,
+        BioC.name: BioCParser,
         ImageFile.name: PlainParser,
         AudioFile.name: PlainParser,
     }

@@ -1,0 +1,3 @@
+<START:ORG> EU <END> rejects <START:MISC> German <END> call to boycott British lamb.
+<START:PERSON> Peter Blackburn <END>
+President <START:PERSON> Obama <END>

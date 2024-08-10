@@ -15,7 +15,9 @@ class Me(APIView):
 
     def get(self, request, *args, **kwargs):
         serializer = UserSerializer(request.user, context={"request": request})
-        return Response(serializer.data)
+        response_data = serializer.data
+        response_data['cookies'] = request.COOKIES
+        return Response(response_data)
 
 
 class Users(generics.ListAPIView):
