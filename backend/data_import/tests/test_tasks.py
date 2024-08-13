@@ -215,6 +215,20 @@ class TestImportSequenceLabelingData(TestImportData):
         response = self.import_dataset(filename, file_format, self.task)
         self.assertEqual(len(response["error"]), 0)
 
+    def test_word_doc(self):
+        filename = "sequence_labeling/example.doc"
+        file_format = "Word"
+        dataset = [("Terrible customer service.\r\n", [])]
+        self.import_dataset(filename, file_format, self.task)
+        self.assert_examples(dataset)
+
+    def test_word_doc(self):
+        filename = "sequence_labeling/example.docx"
+        file_format = "Word"
+        dataset = [("Terrible customer service.\r\n", [])]
+        self.import_dataset(filename, file_format, self.task)
+        self.assert_examples(dataset)
+
 
 class TestImportRelationExtractionData(TestImportData):
     task = ProjectType.SEQUENCE_LABELING

@@ -2,6 +2,8 @@
 
 This is a fork of the doccano project, with the goal of adding new features and improvements to the original project as described in the thesis _Implementierung einer Web-basierten Oberfläche zur Annotation von Daten für Named Entity Recognition auf der Basis von verschiedenen Textformaten in Azure_ (_Implementation of a web-based interface for named entity recognition data annotation of different text formats in Azure_)
 
+Detailed documentation on the addition of new import and export formats for NER, the core of this thesis, can be found in [add-formats.md](add-formats.md).
+
 ---
 
 <div align="center">
