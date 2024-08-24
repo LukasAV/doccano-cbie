@@ -8,7 +8,7 @@
             <v-text-field
               :value="text"
               :counter="100"
-              :label="$t('labels.labelName')"
+              :label="$t('labels.labelName') + ' *'"
               :rules="[rules.required, rules.counter, rules.nameDuplicated]"
               outlined
               required

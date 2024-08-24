@@ -2,7 +2,7 @@
   <v-item-group v-model="selected" mandatory @change="$emit('input', allProjectTypes[selected])">
     <v-row no-gutters>
       <v-col v-for="(item, i) in allProjectTypes" :key="i">
-        <v-item v-slot="{ active, toggle }">
+        <v-item v-slot="{ active, toggle }" class="cursor-pointer">
           <v-card class="mb-6 me-6" max-width="350" outlined>
             <v-img
               :src="require(`~/assets/images/tasks/${images[i]}`)"
@@ -10,7 +10,7 @@
               contain
               @click="toggle"
             />
-            <v-card-title>
+            <v-card-title @click="toggle">
               <v-icon v-if="active">
                 {{ mdiCheckBold }}
               </v-icon>

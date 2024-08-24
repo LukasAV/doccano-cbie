@@ -3,7 +3,7 @@ export default {
   projectName: 'Projektname',
   projectType: 'Projekttyp',
   textClassification: 'Textklassifikation',
-  sequenceLabeling: 'Sequenz-Labeling',
+  sequenceLabeling: 'NER Sequenz-Labeling',
   sequenceToSequence: 'Sequenz zu Sequenz',
   randomizeDocOrder: 'Dokumentenreihenfolge zufällig wählen',
   shareAnnotations: 'Gemeinsame Annotationen für Nutzer',
@@ -13,7 +13,7 @@ export default {
   search: 'Suchen',
   projectTypes: [
     'Textklassifikation',
-    'Sequenz-Labeling',
+    'NER Sequenz-Labeling',
     'Sequenz zu Sequenz',
     'Intent-Erkennung und Slot-Füllung',
     'Bildklassifikation',

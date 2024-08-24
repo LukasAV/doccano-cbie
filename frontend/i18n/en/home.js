@@ -20,5 +20,8 @@ export default {
   demoImageCapt: 'Image Captioning',
   demoObjDetect: 'Object Detection',
   demoPolygSegm: 'Polygon Segmentation',
-  demoSTT: 'Speech to Text'
+  demoSTT: 'Speech to Text',
+  introductionTitle: 'Welcome to doccano - Text Annotation Tool',
+  introductionDescription: 'doccano is an open source tool for text annotation for machine learning tasks like Named Entity Recognition (NER).\nLog in to upload text documents, both annotated and unannotated and start annotating. Define labels, mark entities in the text and assign respective labels. Download annotated texts in various formats.',
+  projectsDescription: 'Select a project to start annotating or create a new one.',
 }

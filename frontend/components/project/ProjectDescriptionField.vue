@@ -3,7 +3,7 @@
     v-bind="$attrs"
     :value="value"
     :rules="descriptionRules"
-    :label="$t('generic.description')"
+    :label="$t('generic.description') + ' *'"
     required
     @input="$emit('input', $event)"
   />

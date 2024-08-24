@@ -3,7 +3,7 @@
     v-bind="$attrs"
     :value="value"
     :rules="projectNameRules"
-    :label="$t('overview.projectName')"
+    :label="$t('overview.projectName') + ' *'"
     required
     @input="$emit('input', $event)"
   />

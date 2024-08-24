@@ -24,23 +24,43 @@ class ApiService {
   }
 
   get(url, config = {}) {
-    return this.request('GET', url, {}, {...config, headers: {'X-CSRFToken': Cookies.get('csrftoken'), ...(config.headers ?? {})}})
+    const headers = config.headers ?? {};
+    if (Cookies.get('csrftoken')) {
+      headers['X-CSRFToken'] = Cookies.get('csrftoken');
+    }
+    return this.request('GET', url, {}, {...config, headers})
   }
 
   post(url, data, config = {}) {
-    return this.request('POST', url, data, {...config, headers: {'X-CSRFToken': Cookies.get('csrftoken'), ...(config.headers ?? {})}})
+    const headers = config.headers ?? {};
+    if (Cookies.get('csrftoken')) {
+      headers['X-CSRFToken'] = Cookies.get('csrftoken');
+    }
+    return this.request('POST', url, data, {...config, headers})
   }
 
   put(url, data, config = {}) {
-    return this.request('PUT', url, data, {...config, headers: {'X-CSRFToken': Cookies.get('csrftoken'), ...(config.headers ?? {})}})
+    const headers = config.headers ?? {};
+    if (Cookies.get('csrftoken')) {
+      headers['X-CSRFToken'] = Cookies.get('csrftoken');
+    }
+    return this.request('PUT', url, data, {...config, headers})
   }
 
   patch(url, data, config = {}) {
-    return this.request('PATCH', url, data, {...config, headers: {'X-CSRFToken': Cookies.get('csrftoken'), ...(config.headers ?? {})}})
+    const headers = config.headers ?? {};
+    if (Cookies.get('csrftoken')) {
+      headers['X-CSRFToken'] = Cookies.get('csrftoken');
+    }
+    return this.request('PATCH', url, data, {...config, headers})
   }
 
   delete(url, data = {}, config = {}) {
-    return this.request('DELETE', url, data, {...config, headers: {'X-CSRFToken': Cookies.get('csrftoken'), ...(config.headers ?? {})}})
+    const headers = config.headers ?? {};
+    if (Cookies.get('csrftoken')) {
+      headers['X-CSRFToken'] = Cookies.get('csrftoken');
+    }
+    return this.request('DELETE', url, data, {...config, headers})
   }
 }
 

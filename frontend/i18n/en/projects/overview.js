@@ -3,7 +3,7 @@ export default {
   projectName: 'Project name',
   projectType: 'Project type',
   textClassification: 'Text Classification',
-  sequenceLabeling: 'Sequence Labeling',
+  sequenceLabeling: 'NER Sequence Labeling',
   sequenceToSequence: 'Sequence to sequence',
   allowSingleLabel: 'Allow single label',
   randomizeDocOrder: 'Randomize document order',
@@ -14,7 +14,7 @@ export default {
   search: 'Search',
   projectTypes: [
     'Text Classification',
-    'Sequence Labeling',
+    'NER Sequence Labeling',
     'Sequence to sequence',
     'Intent Detection and Slot Filling',
     'Image Classification',

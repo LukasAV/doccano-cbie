@@ -15,6 +15,11 @@
       >
         {{ $t('generic.delete') }}
       </v-btn>
+      <div class="body-1" style="word-break: break-word">
+        {{ $t('home.introductionDescription') }}
+        <br>
+        {{ $t('home.projectsDescription') }}
+      </div>
       <v-dialog v-model="dialogDelete">
         <form-delete :selected="selected" @cancel="dialogDelete = false" @remove="remove" />
       </v-dialog>

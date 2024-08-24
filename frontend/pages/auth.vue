@@ -1,8 +1,18 @@
 <template>
   <v-app id="inspire">
     <v-main>
+
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="4">
+            <v-card>
+              <v-card-title>{{ $t('home.introductionTitle') }}</v-card-title>
+              <v-divider />
+              <v-card-text>
+                {{ $t('home.introductionDescription') }}
+              </v-card-text>
+            </v-card>
+          </v-col>
           <v-col cols="12" sm="8" md="4">
             <form-login :login="authenticateUser" />
             <social-login :fetch-social-link="fetchSocialLink" />
